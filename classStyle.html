@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue 绑定 css 跟style</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="classStyle.js"></script>
+	<style>
+		.static{
+			width: 200px;
+			height:200px;
+			background: #fff000;
+			position: absolute;
+		}
+
+		.middle{
+			/*position: relative;*/
+			width:150px;
+			height:150px;
+			z-index:2;
+		    left: 50%;
+    		top: 50%;
+			margin-left:26px;
+			margin-top:26px;
+		}
+		.isActive{
+			background-color:blue; 
+		}	
+
+		.isError{
+			color:red;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="static">
+			<!-- 对象语法 -->
+			<!-- <div class="middle"  v-bind:class="{isActive:isActive,isError:isError}"></div>; -->
+
+			<!-- 也可以直接绑定一个数据对象 -->
+			<!-- <div class="middle"  v-bind:class="classObject"></div>; -->
+
+			<!-- 同样可以绑定返回对象的计算属性 -->
+			<!-- <div class="middle" v-bind:class="classObjected"></div> -->
+
+
+			<!-- 数组语法 -->
+			<!-- <div class="middle" v-bind:class="[activeClass,errorClass]">字体</div> -->
+
+			<!-- 数组中根据条件绑定 可在数组中使用三元式 -->
+			<!-- <div class="middle" v-bind:class="[isActive ? activeClass : '',errorClass]">字体</div> -->
+
+			<!-- 在数组中使用对象语法 -->
+
+			<div class="middle" v-bind:class="[{isActive:isActive},errorClass]">字体</div>
+		</div>	
+
+		<!-- 内联样式绑定style 对象语法 -->
+		<!-- <p v-bind:style="{color:color,fontSize:fontSize+'px'}">Vue 绑定style 内联样式</p> -->
+
+		<!-- 直接绑定一个数据对象 -->
+		<!-- <p v-bind:style="styleObject">直接绑定一个对象</p> -->
+
+		<!-- 将样式绑定在计算属性里面 -->
+		<!-- <p v-bind:style="styleObjected">将样式绑定在计算属性里面</p> -->
+
+		<!-- 将样式以数组形式绑定 -->
+		<p v-bind:style="[colorArr,fontSizeArr]">数组绑定样式数组绑定样式数组绑定样式</p>
+	</div>
+</body>
+</html>

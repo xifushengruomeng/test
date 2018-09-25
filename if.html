@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>If条件渲染</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="if.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p v-if="ok">绑定if渲染 v-if ='ok' ok 定义为true 则内容显示 不显示则p标签也会不显示</p>
+		<p v-else>ok 被定义为false了吧</p>
+
+		<p v-if="Math.random() > 0.5">在v-if = '' 等式右边可以写js等式 如 v-if="Math.random() > 0.5"</p>
+
+		<p v-else>随机数可能小于等于0.5了</p>
+
+
+		<!-- 包装元素 template v-if -->
+		<!-- 因为 v-if 是一个指令，需要将它添加到一个元素上。但是如果我们想切换多个元素呢？此时我们可以把一个 <template> 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它 -->
+		<template v-if="ok">
+			<h1>one</h1>	
+			<h2>two</h2>	
+			<h3>three</h3>
+		</template>
+
+		<template v-else>
+			<h4>four</h4>	
+			<h5>five</h5>	
+			<h6>six</h6>
+		</template>
+
+		<p v-show='ok'>v-show 跟v-if 用法基本一样 v-show 类似于display属性 但是不支持template 后面是否跟v-else 文档似乎说可以但是测试后是不行的</p>
+
+		<!-- v-if vs. v-show
+
+		v-if 是真实的条件渲染，因为它会确保条件块在切换当中适当地销毁与重建条件块内的事件监听器和子组件。
+
+		v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——在条件第一次变为真时才开始局部编译（编译会被缓存起来）。
+
+		相比之下， v-show 简单得多——元素始终被编译并保留，只是简单地基于 CSS 切换。
+
+		一般来说， v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换使用 v-show 较好，如果在运行时条件不大可能改变则使用 v-if 较好。 -->
+
+	</div>
+</body>
+</html>

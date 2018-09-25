@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>监听事件</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="jquery-2.0.3.min.js"></script>
+	<script src="event.js"></script>
+</head>
+<body>
+	<div id='app'>
+		<!-- 方法事件处理器 -->
+		<button v-on:click="greet">点我打招呼</button>
+		<p>{{greetText}}</p>
+		
+		<!-- 内联处理器方法 -->
+		<button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit</button>
+		
+
+		<!-- 事件修饰符 -->
+			<!-- 阻止单击事件冒泡 -->
+			<a v-on:click.stop="doThis"></a>
+			<!-- 提交事件不再重载页面 -->
+			<form v-on:submit.prevent="onSubmit"></form>
+			<!-- 修饰符可以串联  -->
+			<a v-on:click.stop.prevent="doThat"></a>
+			<!-- 只有修饰符 -->
+			<form v-on:submit.prevent></form>
+			<!-- 添加事件侦听器时使用事件捕获模式 -->
+			<div v-on:click.capture="doThis">...</div>
+			<!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 -->
+			<div v-on:click.self="doThat">...</div>
+
+		<!-- 按键修饰符 -->
+			<!-- 在监听键盘事件时，我们经常需要监测常见的键值。 Vue 允许为 v-on 在监听键盘事件时 -->
+			<!-- 只有在 keyCode 是 13 时调用 vm.submit() -->
+			<input v-on:keyup.13="doThat">
+
+			<!-- 同上 -->
+			<input v-on:keyup.enter="doThat">
+			<!-- 缩写语法 -->
+			<!-- <input @keyup.enter="doThat"> -->
+
+<!-- 			全部的按键别名：
+
+			enter
+			tab
+			delete (捕获 “删除” 和 “退格” 键)
+			esc
+			space
+			up
+			down
+			left
+			right -->
+	</div>
+</body>
+</html>

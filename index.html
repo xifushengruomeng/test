@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="index.js"></script>
+</head>
+<body>
+		<div id="app">
+			<!-- 申明式渲染模板  使用 “Mustache” 语法（双大括号）的文本插值-->
+		  	{{ message }}
+			
+			<p>
+			  	<span>使用javascript表达式</span>{{ message.split('').reverse().join('') }}
+			</p>
+			<p>
+				<span v-bind:title="'list-' + message">使用v-bind 绑定 作用 js {{ message }}</span>
+			</p>
+
+			<p>
+				<span :title="message">v-bind 缩写 v-bind:title='message' => :title='message'</span>
+			</p>
+	
+				<!-- //过滤器 默认message表达式作为方法的第一个参数 -->
+			<p>
+				<span>使用过滤器：</span>{{ message |func1('for second params') }}
+			</p>
+
+				<!-- 过滤器串联 -->
+			<p>
+				<span>使用过滤器：</span>{{ message |func1('for second params')|func2('connacted for again') }}
+			</p>
+		  	<!-- Mustache 不能在 HTML 属性中使用，应使用 v-bind 指令响应更新文本   v- 表示指令 -->
+		  	<div v-bind:title='title'>
+		  		(｡･∀･)ﾉﾞ嗨 the beautiful girl ,I love you
+		  	</div>
+
+			<!-- if 条件 -->
+		  	<div v-if='show'>you can seen me now</div>
+		  	<div v-if='hidden'>you can not seen me now</div>
+
+		  <!-- for 循环 -->
+		  	<div>
+		  		<li v-for="i in datas">
+		  		{{i.text}}
+		  		</li>
+		  	</div>
+
+		  <!-- v-on 绑定事件监听 处理用户输入 -->
+		  	<div>{{message}}</div>
+		  	<button v-on:click="reverser">click for a suprise</button>
+		  	<p>
+		  		<span>缩写v-on v-on:click="func1" => @click='func1'</span> <button @click='reverser'>缩写命令</button>
+		  	</p>
+
+		  <!-- v-model 自动响应表单输入的内容 -->
+		  	<div>
+				<input type="text" v-model="message">			
+		  	</div>
+
+			<!-- 构建 tudo-item 标签 -->
+			<ul>
+				<tudo-item></tudo-item>
+			</ul>	
+			<ul>
+				<myitem v-for="item in datas" v-bind:tudo='item'></myitem>
+			</ul>
+		  	<div v-html="htmlText"></div>
+
+		  	<div>使用计算属性获取message：{{reverseMessage}}</div>
+		</div>
+</body>
+</html>

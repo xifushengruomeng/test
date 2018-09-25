@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="component.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 全局组件使用	 -->
+		<myct></myct>
+
+		<!-- 局部组件使用 -->
+		<myh></myh>
+
+		<p>DOM模板解析组件说明，当使用 DOM 作为模版时（例如，将 el 选项挂载到一个已存在的元素上）, 你会受到 HTML 的一些限制，因为 Vue 只有在浏览器解析和标准化 HTML 后才能获取模版内容。尤其像这些元素 ul ， ol， table ， select 限制了能被它包裹的元素， option 只能出现在其它元素内部</p>
+		<p>变通的方案是使用特殊的 is 属性</p>
+
+		<table>
+			<tr is="myh"></tr>
+		</table>
+
+		<p>传人Vue构造器中data必须是函数</p>
+		<p>
+			<test></test>
+			<test></test>
+			<test></test>
+		</p>
+
+
+		<p>#使用props 传递数据  字面量语法</p>
+		<enheng message="hello"></enheng>
+
+		<p>#camelCase vs. kebab-case  </p>
+		<p>HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）</p>
+	
+		<p>
+			<hell my-message="my message"></hell>
+		</p>
+
+
+		<p>#动态绑定props 动态语法</p>
+		<input type="text" v-model="message">
+		<hell v-bind:my-message="message"></hell>
+
+
+		<p>#字面量语法 VS 动态语法</p>
+		<p>
+			<!-- 此时传递的会是一个字符串	 -->
+			<enheng message='1'></enheng>
+
+			<!-- 此时传递的会是一个整数 -->
+			<enheng v-bind:message='1'></enheng>
+		</p>
+
+		<p>单向数据流 ：prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。这是为了防止子组件无意修改了父组件的状态——这会让应用的数据流难以理解</p>
+		<p>两种情况可改变props</p>
+		<h5>1，在组件中定义一个局部的data 并将props的初始值作为data的初始值</h5>
+		<!-- ......... -->
+		<single v-bind:single-stream="3"></single>
+
+		<h5>2,定义一个computed属性，此属性从props中计算得出 将大写转化为小写</h5>
+		<singlet v-bind:single-two = 'a'></singlet>
+
+		<p>props验证:</p>
+		<input type="text" v-model='b'>
+		<check v-bind:prop-a ='b'></check>
+	</div>	
+</body>
+</html>
