@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="for.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>{{ message }}</p>
+		<!--  列表渲染基本用法 -->
+		<ul>
+			<li v-for="item in items">
+				{{ item.msg }}	
+			</li>
+		</ul>
+
+		<p>在 v-for 块中，我们拥有对父作用域属性的完全访问权限。 v-for 还支持一个可选的第二个参数为当前项的索引。</p>
+		<ul>
+			<li v-for="(item,index) in items">
+				{{message}} ----{{ index }} ---- {{ item.msg }}
+			</li>
+		</ul>
+
+		<p> v-for 块中 可用 of 代替 in </p>
+
+		<ul>
+			<li v-for="item in items">
+				{{ item.msg }}	
+			</li>
+		</ul>
+
+		<!-- template v-for -->
+		<p>如同 v-if 模板，你也可以用带有 v-for 的 template 标签来渲染多个元素块</p>
+		<ul>
+			<template v-for="(item,index) in items">
+				<li>{{ item.msg }}</li>	
+				<li>{{ index }}</li>
+			</template>
+		</ul>
+
+		<!-- 对象迭代for -->
+		<p>对象迭代 v-for</p>
+		<ul>
+			<li v-for="value in itemsObj">
+				{{ value }}
+			</li>
+		</ul>	
+
+		<!-- 迭代提供两个参数 -->
+		<p>对象迭代 可提供第二个参数为键名</p>
+		<ul>
+			<li v-for="(value,key) in itemsObj">
+				健：{{ key }}----值:{{ value }}
+			</li>
+		</ul>
+
+		<!-- 迭代提供三个参数 -->
+		<p>对象迭代v-for 提供第三个参数为索引</p>
+		<ul>
+			<li v-for="(value,key,index) in itemsObj">
+			索引：{{index}} --- 健：{{ key }}----值:{{ value }}
+			</li>
+		</ul>
+		
+		<p>整数迭代for</p>
+		<p>
+			<a href="" v-for="n in 10">
+				{{n}}
+			</a>
+		</p>
+
+
+		<!-- for 与 组件 -->
+		<p>
+			<tudo-item v-for="(value,key) in itemsObj" v-bind:item="value" v-bind:index='key'>
+			</tudo-item>
+		</p>
+
+		<input v-model="newTodoText" v-on:keyup.enter="addNewTodo"placeholder="Add a todo">
+  		<ul>
+		    <li is="myitem"v-for="(todo, index) in todos"v-bind:title="todo"v-on:remove="todos.splice(index, 1)"></li>
+		</ul>
+	</div>
+</body>
+</html>
